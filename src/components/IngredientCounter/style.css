@@ -1,0 +1,32 @@
+.ingredients-counter {
+  border: 1px solid #542e08;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.ingredients-counter:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.ingredients-counter__ingredient {
+  text-transform: uppercase;
+}
+
+.ingredients-counter__btn {
+  height: 32px;
+  width: 32px;
+  background-color: #9c5b1a;
+  color: #f7e579;
+  transition: background-color 0.3s;
+}
+
+.ingredients-counter__btn:hover,
+.ingredients-counter__btn:focus {
+  background-color: #542e08;
+}
+
+.ingredients-counter__btn:disabled {
+  background-color: #966c42;
+}

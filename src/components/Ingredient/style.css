@@ -1,0 +1,94 @@
+.meat {
+  height: 25px;
+  border-radius: 8px;
+  background-color: #542e08;
+}
+
+.meat--navbar {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #542e08;
+}
+
+.cheese--navbar {
+  border-radius: 2px;
+  height: 2px;
+  background-color: #d9b71e;
+}
+
+.lettuce--navbar {
+  border-radius: 2px;
+  height: 2px;
+  background-color: #18941e;
+}
+
+.tomato--navbar {
+  position: relative;
+  height: 2px;
+  background-color: red;
+}
+
+.cheese {
+  background-color: #d9b71e;
+  position: relative;
+}
+
+.cheese::after {
+  content: "";
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #d9b71e;
+  top: 100%;
+  left: 70%;
+}
+
+.lettuce {
+  background-color: #18941e;
+}
+
+.bacon {
+  background-color: #965d3f;
+}
+
+.cheese,
+.lettuce,
+.bacon,
+.tomato {
+  height: 10px;
+  border-radius: 8px;
+}
+
+.meat,
+.cheese,
+.lettuce,
+.bacon,
+.tomato,
+.meat--navbar,
+.cheese--navbar,
+.tomato--navbar,
+.lettuce--navbar {
+  margin: 1px 0;
+}
+
+.tomato {
+  position: relative;
+}
+
+.tomato::after,
+.tomato::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 45%;
+  background-color: red;
+  border-radius: 8px;
+}
+
+.tomato::after {
+  right: 2.5%;
+}
+
+.tomato::before {
+  left: 2.5%;
+}

@@ -1,38 +1,129 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #f7e579;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  height: calc(100% - 60px);
+}
+
+.main > * {
+  height: 100%;
+}
+
+.burger-cta {
+  background-color: #f7e579;
+}
+
+.burger-cta__header {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.burger-cta__content {
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.burger {
+  flex: 1;
+  border-right: 1px solid #542e08;
+  border-left: 1px solid #542e08;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.burger-cta,
+.order-details {
+  width: 300px;
+}
+
+.burger,
+.burger-cta__content,
+.burger-container {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.order-details {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.burger-cta,
+.order-details,
+.burger {
+  padding: 32px;
+}
+
+.burger-container {
+  height: 100%;
+  width: 300px;
+}
+
+.burger-container > * {
+  width: 100%;
+}
+
+.order-details__header,
+.burger__header {
+  margin-bottom: 16px;
+}
+
+.order-price {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.order-price__value {
+  font-weight: bold;
+}
+
+/* ORDER DETAISL */
+.order-details__menu {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.order-details__item {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #542e08;
+  box-shadow: 2px 2px 5px #542e08;
+  margin-bottom: 1rem;
+}
+
+.order-details__item > *:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.order-details__item-title {
+  text-transform: uppercase;
+  border-bottom: 1px solid #542e08;
+  text-align: center;
+  padding-bottom: 4px;
 }
