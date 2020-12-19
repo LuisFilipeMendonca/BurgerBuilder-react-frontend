@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-
 import Bread from "../../components/Bread";
 import Ingredient from "../../components/Ingredient";
 import IngredientCounter from "../../components/IngredientCounter";
 
 import ingredients from "../../constants/ingredients";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
+
 const MainPage = () => {
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useLocalStorage("burgerOrder", []);
 
   const addIngredientHandler = (ing) => {
     const ingredient = ingredients.find(
@@ -66,19 +66,7 @@ const MainPage = () => {
     return orderDetails;
   };
 
-  useEffect(() => {
-    const storedOrder = JSON.parse(window.localStorage.getItem("burgerOrder"));
-
-    if (storedOrder) {
-      setOrder(storedOrder);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("burgerOrder", JSON.stringify(order));
-  }, [order]);
-
-  console.log(order);
+  const resetOrderHandler = () => setOrder([]);
 
   return (
     <main className="main">
@@ -103,6 +91,7 @@ const MainPage = () => {
               }
             />
           ))}
+          <button onClick={resetOrderHandler}>Reset Burger</button>
         </div>
       </section>
       <section className="burger">

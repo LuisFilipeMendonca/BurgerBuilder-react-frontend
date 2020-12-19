@@ -3,11 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 200px;
+  width: 100%;
+  margin-bottom: 16px;
 }
 
-.ingredients-counter:not(:last-of-type) {
-  margin-bottom: 16px;
+.ingredients-counter:last-of-type {
+  margin-bottom: 32px;
 }
 
 .ingredients-counter__ingredient {
