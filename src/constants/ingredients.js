@@ -1,4 +1,4 @@
-export default [
+const ingredients = [
   {
     id: 1,
     name: "meat",
@@ -25,3 +25,5 @@ export default [
     price: 0.3,
   },
 ];
+
+export default ingredients;

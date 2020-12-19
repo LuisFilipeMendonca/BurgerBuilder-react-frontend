@@ -1,0 +1,18 @@
+.order-details__item {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #542e08;
+  box-shadow: 2px 2px 5px #542e08;
+  margin-bottom: 1rem;
+}
+
+.order-details__item > *:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.order-details__item-title {
+  text-transform: uppercase;
+  border-bottom: 1px solid #542e08;
+  text-align: center;
+  padding-bottom: 4px;
+}

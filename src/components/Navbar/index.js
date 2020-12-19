@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
-
 import "./style.css";
 
 import Logo from "../Logo";
+import NavbarItem from "../NavbarItem";
 
 const Navbar = () => {
   const isLoggedIn = false;
@@ -16,36 +15,26 @@ const Navbar = () => {
         <h1 className="navbar__header-title">Burger Builder</h1>
       </div>
       <ul className="navbar__menu">
-        <li className="navbar__item">
-          <NavLink className="navbar__link" to="/" exact>
-            Build
-          </NavLink>
-        </li>
+        <NavbarItem className="navbar__link" path="/">
+          Build
+        </NavbarItem>
         {isLoggedIn ? (
           <>
-            <li className="navbar__item">
-              <NavLink className="navbar__link" to="/orders">
-                Orders
-              </NavLink>
-            </li>
-            <li className="navbar__item">
-              <NavLink className="navbar__link" to="/logout">
-                Logout
-              </NavLink>
-            </li>
+            <NavbarItem className="navbar__link" path="/orders">
+              Orders
+            </NavbarItem>
+            <NavbarItem className="navbar__link" path="/logout">
+              Logout
+            </NavbarItem>
           </>
         ) : (
           <>
-            <li className="navbar__item">
-              <NavLink className="navbar__link" to="/login">
-                Login
-              </NavLink>
-            </li>
-            <li className="navbar__item">
-              <NavLink className="navbar__link--highlighted" to="/register">
-                Register
-              </NavLink>
-            </li>
+            <NavbarItem className="navbar__link" path="/login">
+              Login
+            </NavbarItem>
+            <NavbarItem className="navbar__link--highlighted" path="/register">
+              Register
+            </NavbarItem>
           </>
         )}
       </ul>
