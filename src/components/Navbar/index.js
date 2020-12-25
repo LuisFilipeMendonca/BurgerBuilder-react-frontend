@@ -29,11 +29,8 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavbarItem className="navbar__link" path="/login">
+            <NavbarItem className="navbar__link--highlighted" path="/login">
               Login
-            </NavbarItem>
-            <NavbarItem className="navbar__link--highlighted" path="/register">
-              Register
             </NavbarItem>
           </>
         )}

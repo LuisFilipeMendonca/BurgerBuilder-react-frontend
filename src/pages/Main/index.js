@@ -16,8 +16,6 @@ const MainPage = () => {
   const ingredients = useContext(IngredientsContext);
   // const { order, setOrder } = useContext(OrderContext);
 
-  console.log(ingredients);
-
   const addIngredientHandler = (ing) => {
     const updatedOrder = addIngredient(ing, order);
     setOrder(updatedOrder);

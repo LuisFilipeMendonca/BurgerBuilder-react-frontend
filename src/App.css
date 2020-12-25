@@ -108,3 +108,84 @@ a {
   max-height: 100%;
   overflow: auto;
 }
+
+/* GLOBAL */
+.section {
+  margin: 4rem auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* FORM */
+.form__control {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.form__control button {
+  padding: 0.5rem 4rem;
+  background-color: #9c5b1a;
+  color: #f7e579;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-weight: bold;
+}
+
+.form__control button.highlighted {
+  background-color: #542e08;
+  padding: 1rem 4rem;
+}
+
+.form {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px #542e08;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__title {
+  margin: 2rem 0;
+  text-align: center;
+  color: #542e08;
+}
+
+.form__input-group {
+  margin: 1rem 2rem;
+}
+
+.form__input-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #542e08;
+}
+
+.form__input {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 2px solid #9c5b1a;
+  background-color: transparent;
+  outline: none;
+}
+
+.form__input:focus {
+  border: 2px solid transparent;
+  box-shadow: 0 0 4px #542e08;
+}
+
+.form__input-info {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.form__cta-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.form__cta-container button {
+  padding: 0.5rem 4rem;
+  background-color: #9c5b1a;
+}
