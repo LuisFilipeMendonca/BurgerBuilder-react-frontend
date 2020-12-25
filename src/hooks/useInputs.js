@@ -3,12 +3,26 @@ import { useReducer } from "react";
 const reducer = (state, action) => {
   switch (action.type) {
     case "CHANGE":
-      const updatedState = [...state];
-      const inputIndex = updatedState.findIndex(
+      const updatedChangeState = [...state];
+      const inputChangeIndex = updatedChangeState.findIndex(
         (input) => input.id === action.payload.id
       );
-      updatedState[inputIndex].value = action.payload.value;
-      return updatedState;
+      updatedChangeState[inputChangeIndex].value = action.payload.value;
+      return updatedChangeState;
+    case "FOCUS":
+      const updatedFocusState = [...state];
+      const inputFocusIndex = updatedFocusState.findIndex(
+        (input) => input.id === action.payload.id
+      );
+      updatedFocusState[inputFocusIndex].hasError = false;
+      return updatedFocusState;
+    case "SET_ERROR":
+      const updatedErrorState = [...state];
+      const inputErrorIndex = updatedErrorState.findIndex(
+        (input) => input.id === action.payload.id
+      );
+      updatedErrorState[inputErrorIndex].hasError = true;
+      return updatedErrorState;
     default:
       return state;
   }
@@ -23,7 +37,13 @@ const useInputs = (inputs) => {
       payload: { id: e.target.id, value: e.target.value },
     });
 
-  return [formInputs, inputChangeHandler];
+  const setErrorHandler = (id) =>
+    dispatch({ type: "SET_ERROR", payload: { id } });
+
+  const inputFocusHandler = (e) =>
+    dispatch({ type: "FOCUS", payload: { id: e.target.id } });
+
+  return [formInputs, inputChangeHandler, inputFocusHandler, setErrorHandler];
 };
 
 export default useInputs;

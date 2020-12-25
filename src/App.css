@@ -161,7 +161,8 @@ a {
   color: #542e08;
 }
 
-.form__input {
+.form__input,
+.form__input-error {
   width: 100%;
   padding: 8px 16px;
   border-radius: 4px;
@@ -173,6 +174,10 @@ a {
 .form__input:focus {
   border: 2px solid transparent;
   box-shadow: 0 0 4px #542e08;
+}
+
+.form__input-error {
+  border: 2px solid red;
 }
 
 .form__input-info {

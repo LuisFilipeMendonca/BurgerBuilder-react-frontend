@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 import useInputs from "../../hooks/useInputs";
 
@@ -7,21 +8,89 @@ const authInputs = [
     id: "email",
     type: "email",
     value: "",
+    hasError: false,
   },
   {
     id: "password",
     type: "password",
     value: "",
     info: "Should contain at least 6 characters",
+    hasError: false,
   },
 ];
 
+const emailValidator = (input, errorHandler) => {
+  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const isValid = emailRegex.test(input.value);
+
+  if (!isValid) errorHandler(input.id);
+
+  return isValid;
+};
+
+const lengthValidator = (input, errorHandler, min, max) => {
+  const isValid = input.value.length >= min && input.value.length <= max;
+
+  if (!isValid) errorHandler(input.id);
+
+  return isValid;
+};
+
 const LoginPage = () => {
   const [mode, setMode] = useState("login");
-  const [formInputs, inputChangeHandler] = useInputs([...authInputs]);
+  const [
+    formInputs,
+    inputChangeHandler,
+    inputFocusHandler,
+    setErrorHandler,
+  ] = useInputs([...authInputs]);
 
   const setModeHandler = (mode) => {
     setMode(mode);
+  };
+
+  const authHandler = async () => {
+    let url =
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCowqrVcdA4nxQ_VANHaFt-Z1wZfwizbZ8";
+
+    if (mode === "login") {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCowqrVcdA4nxQ_VANHaFt-Z1wZfwizbZ8";
+    }
+
+    try {
+      const response = await axios.post(url, {
+        email: formInputs[0].value,
+        password: formInputs[1].value,
+        returnSecureToken: true,
+      });
+
+      console.log(response.data);
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    let isFormValid = true;
+
+    formInputs.forEach((input) => {
+      if (input.id === "email") {
+        isFormValid = emailValidator(input, setErrorHandler) && isFormValid;
+      }
+      if (input.id === "password") {
+        isFormValid =
+          lengthValidator(input, setErrorHandler, 6, 50) && isFormValid;
+      }
+    });
+
+    if (!isFormValid) {
+      return;
+    }
+
+    authHandler();
   };
 
   return (
@@ -40,7 +109,7 @@ const LoginPage = () => {
           Register
         </button>
       </div>
-      <form className="form">
+      <form className="form" onSubmit={submitHandler}>
         <h2 className="form__title">
           Login to purchase your delicious burger!
         </h2>
@@ -52,8 +121,11 @@ const LoginPage = () => {
             type={formInputs[0].type}
             id={formInputs[0].id}
             value={formInputs[0].value}
-            className="form__input"
+            className={`${
+              formInputs[0].hasError ? "form__input-error" : "form__input"
+            }`}
             onChange={inputChangeHandler}
+            onFocus={inputFocusHandler}
           />
         </div>
         <div className="form__input-group">
@@ -64,13 +136,18 @@ const LoginPage = () => {
             type={formInputs[1].type}
             id={formInputs[1].id}
             value={formInputs[1].value}
-            className="form__input"
+            className={`${
+              formInputs[1].hasError ? "form__input-error" : "form__input"
+            }`}
             onChange={inputChangeHandler}
+            onFocus={inputFocusHandler}
           />
           <p className="form__input-info">{formInputs[1].info}</p>
         </div>
         <div className="form__cta-container">
-          <button>{mode === "login" ? "Login" : "Register"}</button>
+          <button onClick={submitHandler}>
+            {mode === "login" ? "Login" : "Register"}
+          </button>
         </div>
       </form>
     </section>
