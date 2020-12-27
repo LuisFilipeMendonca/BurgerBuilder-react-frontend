@@ -1,17 +1,32 @@
 import Bread from "../../components/Bread";
 import Ingredient from "../../components/Ingredient";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import "./style.css";
+
+import { sortOrder } from "../../helpers/Burger";
+
+import TitleSecondary from "../../components/TitleSecondary";
 
 const Burger = ({ order }) => {
   return (
-    <section className="burger">
+    <section className="section burger">
       <header className="burger__header">
-        <h2>Your delicious Burger</h2>
+        <TitleSecondary title="Your Delicious Burger" />
       </header>
       <div className="burger-container">
         <Bread>
-          {order.map((ingredient) => (
-            <Ingredient key={ingredient.id} type={ingredient.name} />
-          ))}
+          <TransitionGroup>
+            {sortOrder(order).map((ingredient) => (
+              <CSSTransition
+                timeout={300}
+                classNames="move"
+                key={ingredient.id}
+              >
+                <Ingredient type={ingredient.name} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </Bread>
       </div>
     </section>

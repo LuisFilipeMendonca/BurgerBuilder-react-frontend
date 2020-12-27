@@ -1,5 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 
+import "./style.css";
+
 import MainPage from "../pages/Main";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";

@@ -1,23 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
-import useInputs from "../../hooks/useInputs";
+import "./style.css";
 
-const authInputs = [
-  {
-    id: "email",
-    type: "email",
-    value: "",
-    hasError: false,
-  },
-  {
-    id: "password",
-    type: "password",
-    value: "",
-    info: "Should contain at least 6 characters",
-    hasError: false,
-  },
-];
+import TitleSecondary from "../../components/TitleSecondary";
+
+import useInputs from "../../hooks/useInputs";
+import AuthContext from "../../context/Auth";
+
+import AuthAPI from "../../api/Auth";
+
+import { authInputs } from "../../constants/inputs";
 
 const emailValidator = (input, errorHandler) => {
   const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -45,6 +38,8 @@ const LoginPage = () => {
     setErrorHandler,
   ] = useInputs([...authInputs]);
 
+  const { setAuth } = useContext(AuthContext);
+
   const setModeHandler = (mode) => {
     setMode(mode);
   };
@@ -59,15 +54,19 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await axios.post(url, {
-        email: formInputs[0].value,
+      const data = {
+        email: "luis@teste.com",
         password: formInputs[1].value,
         returnSecureToken: true,
-      });
+      };
 
-      console.log(response.data);
+      const response = await AuthAPI.register(data);
+
+      console.log(response);
+
+      setAuth(response);
     } catch (e) {
-      console.log(e.response);
+      console.log(e);
     }
   };
 
@@ -94,7 +93,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="section">
+    <section className="section section--center">
       <div className="form__control">
         <button
           className={mode === "login" ? "highlighted" : null}
@@ -110,9 +109,10 @@ const LoginPage = () => {
         </button>
       </div>
       <form className="form" onSubmit={submitHandler}>
-        <h2 className="form__title">
-          Login to purchase your delicious burger!
-        </h2>
+        <TitleSecondary
+          title="Login to purchase your delicious burger!"
+          modifier="center"
+        />
         <div className="form__input-group">
           <label htmlFor={formInputs[0].id} className="form__input-label">
             Email

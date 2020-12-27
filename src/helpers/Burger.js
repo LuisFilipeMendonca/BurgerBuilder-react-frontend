@@ -5,7 +5,7 @@ export const addIngredient = (addedIngredient, order) => {
     (ingredient) => ingredient.name === addedIngredient
   );
   const orderCopy = [...order];
-  orderCopy.unshift({
+  orderCopy.push({
     id: new Date().getTime(),
     name: ingredient.name,
     ingredientId: ingredient.id,
@@ -13,6 +13,11 @@ export const addIngredient = (addedIngredient, order) => {
   });
 
   return orderCopy;
+};
+
+export const sortOrder = (order) => {
+  const sortedOrder = order.sort((a, b) => b.id - a.id);
+  return sortedOrder;
 };
 
 export const removeIngredient = (removedIngredient, order) => {
@@ -29,25 +34,25 @@ export const calculateTotalPrice = (order) => {
   return order.reduce((acc, curr) => (acc += curr.price), 0).toFixed(2);
 };
 
-export const buildOrderDetails = (order) => {
+export const buildOrderDetails = (order, ingredients) => {
   const orderDetails = [];
 
+  ingredients.forEach((ingredient) => {
+    orderDetails.push({
+      id: ingredient.id,
+      name: ingredient.name,
+      totalPrice: 0,
+      quantity: 0,
+    });
+  });
+
   order.forEach((ingredient) => {
-    const alreadyExistsIndex = orderDetails.findIndex(
+    const ingIndex = orderDetails.findIndex(
       (ing) => ing.name === ingredient.name
     );
 
-    if (alreadyExistsIndex >= 0) {
-      orderDetails[alreadyExistsIndex].quantity += 1;
-      orderDetails[alreadyExistsIndex].totalPrice += ingredient.price;
-    } else {
-      orderDetails.push({
-        id: ingredient.id,
-        name: ingredient.name,
-        totalPrice: ingredient.price,
-        quantity: 1,
-      });
-    }
+    orderDetails[ingIndex].quantity += 1;
+    orderDetails[ingIndex].totalPrice += ingredient.price;
   });
   return orderDetails;
 };

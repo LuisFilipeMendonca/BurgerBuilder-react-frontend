@@ -1,3 +1,7 @@
+.navbar__item:not(:last-of-type) {
+  margin-right: 2rem;
+}
+
 .navbar__link,
 .navbar__link--highlighted {
   padding: 4px 24px;

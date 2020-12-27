@@ -1,6 +1,7 @@
 import ingredients from "../../constants/ingredients";
 
 import IngredientCounter from "../../components/IngredientCounter";
+import TitleSecondary from "../../components/TitleSecondary";
 
 const BurgerCta = ({
   addIngredientHandler,
@@ -9,9 +10,9 @@ const BurgerCta = ({
   resetOrderHandler,
 }) => {
   return (
-    <section className="burger-cta">
+    <section className="section burger-cta">
       <header className="burger-cta__header">
-        <h2>Add Ingredients</h2>
+        <TitleSecondary title="Add Ingredients" />
       </header>
       <div className="burger-cta__content">
         {ingredients.map((ingredient) => (

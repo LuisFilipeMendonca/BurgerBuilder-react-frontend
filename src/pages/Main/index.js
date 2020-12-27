@@ -29,7 +29,7 @@ const MainPage = () => {
   const resetOrderHandler = () => setOrder([]);
 
   return (
-    <main className="main">
+    <>
       <BurgerCta
         addIngredientHandler={addIngredientHandler}
         removeIngredientHandler={removeIngredientHandler}
@@ -38,7 +38,7 @@ const MainPage = () => {
       />
       <Burger order={order} />
       <OrderDetails order={order} />
-    </main>
+    </>
   );
 };
 

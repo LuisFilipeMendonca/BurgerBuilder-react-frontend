@@ -9,12 +9,17 @@ import Routes from "./routes";
 
 import dummyIngredients from "./constants/ingredients";
 
+import useLocalStorage from "./hooks/useLocalStorage";
+
 import IngredientsContext from "./context/Ingredients";
 import OrderContext from "./context/Order";
+import AuthContext from "./context/Auth";
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
   const [order, setOrder] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [auth, setAuth] = useLocalStorage("burgerAuth", {});
 
   const fetchIngredients = async () => {
     try {
@@ -41,23 +46,31 @@ const App = () => {
     } catch (e) {
       console.log(e);
     }
-  };
 
-  console.log(ingredients);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     fetchIngredients();
   }, []);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <BrowserRouter>
-        <IngredientsContext.Provider value={ingredients}>
-          <OrderContext.Provider value={{ order, setOrder }}>
-            <Navbar />
-            <Routes />
-          </OrderContext.Provider>
-        </IngredientsContext.Provider>
+        <AuthContext.Provider value={{ auth, setAuth }}>
+          <IngredientsContext.Provider value={ingredients}>
+            <OrderContext.Provider value={{ order, setOrder }}>
+              <Navbar />
+              <main className="main">
+                <Routes />
+              </main>
+            </OrderContext.Provider>
+          </IngredientsContext.Provider>
+        </AuthContext.Provider>
       </BrowserRouter>
     </>
   );

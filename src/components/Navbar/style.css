@@ -23,7 +23,3 @@
 .navbar__menu {
   display: flex;
 }
-
-.navbar__item:not(:last-of-type) {
-  margin-right: 1rem;
-}

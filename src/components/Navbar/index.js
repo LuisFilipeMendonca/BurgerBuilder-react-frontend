@@ -1,10 +1,18 @@
+import { useContext } from "react";
+
 import "./style.css";
 
 import Logo from "../Logo";
 import NavbarItem from "../NavbarItem";
 
+import AuthContext from "../../context/Auth";
+
 const Navbar = () => {
-  const isLoggedIn = false;
+  const { auth } = useContext(AuthContext);
+
+  const isLoggedIn = () => {
+    return !!auth.token;
+  };
 
   return (
     <nav className="navbar">
@@ -18,12 +26,12 @@ const Navbar = () => {
         <NavbarItem className="navbar__link" path="/">
           Build
         </NavbarItem>
-        {isLoggedIn ? (
+        {isLoggedIn() ? (
           <>
             <NavbarItem className="navbar__link" path="/orders">
               Orders
             </NavbarItem>
-            <NavbarItem className="navbar__link" path="/logout">
+            <NavbarItem className="navbar__link--highlighted" path="/logout">
               Logout
             </NavbarItem>
           </>
