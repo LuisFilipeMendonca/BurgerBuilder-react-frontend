@@ -1,0 +1,83 @@
+.dialog__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.dialog {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  background-color: #f7e579;
+  border: none;
+  border-radius: 8px;
+}
+
+.dialog__header {
+  padding: 1rem;
+  background-color: #9c5b1a;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dialog__header > :first-child {
+  margin-bottom: 0;
+}
+
+.dialog__content {
+  padding: 1rem;
+}
+
+.dialog__text {
+  margin: 0.5rem 0;
+}
+
+.dialog__close {
+  margin: 0.5rem 0;
+}
+
+.backdrop-enter {
+  opacity: 0;
+}
+
+.backdrop-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.backdrop-enter {
+  opacity: 1;
+}
+
+.backdrop-exit-active {
+  opacity: 0;
+  transition: opacity 1s ease-out 0.5s;
+}
+
+.dialog-animate-enter {
+  opacity: 0;
+  transform: translateY(-50%, -30px);
+}
+
+.dialog-animate-enter-active {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition: all 1s ease-out 0.5s;
+}
+
+.dialog-animate-exit {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.dialog-animate-exit-active {
+  opacity: 0;
+  transform: translate(-50%, -30px);
+  transition: all 0.5s ease-in;
+}

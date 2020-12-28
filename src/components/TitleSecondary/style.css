@@ -6,3 +6,7 @@
 .title-secondary--center {
   text-align: center;
 }
+
+.title-secondary--light {
+  color: #f7e579;
+}
