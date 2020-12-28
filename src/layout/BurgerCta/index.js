@@ -1,14 +1,17 @@
-import ingredients from "../../constants/ingredients";
+import { useContext } from "react";
+
+import OrderContext from "../../context/Order";
+import IngredientsContext from "../../context/Ingredients";
 
 import IngredientCounter from "../../components/IngredientCounter";
 import TitleSecondary from "../../components/TitleSecondary";
 
-const BurgerCta = ({
-  addIngredientHandler,
-  removeIngredientHandler,
-  order,
-  resetOrderHandler,
-}) => {
+const BurgerCta = () => {
+  const { order, setOrder } = useContext(OrderContext);
+  const ingredients = useContext(IngredientsContext);
+
+  const resetOrderHandler = () => setOrder([]);
+
   return (
     <section className="section burger-cta">
       <header className="burger-cta__header">
@@ -20,8 +23,6 @@ const BurgerCta = ({
             key={ingredient.name}
             ingredient={ingredient.name}
             quantity={ingredient.quantity}
-            addIngredientHandler={addIngredientHandler}
-            removeIngredientHandler={removeIngredientHandler}
             minusDisabled={!order.some((ing) => ing.name === ingredient.name)}
             plusDisabled={
               order.filter((ing) => ing.name === ingredient.name).length >= 5

@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import axios from "axios";
 
 import "./style.css";
 
@@ -10,24 +9,9 @@ import AuthContext from "../../context/Auth";
 
 import AuthAPI from "../../api/Auth";
 
+import { formValidator } from "../../helpers/Form";
+
 import { authInputs } from "../../constants/inputs";
-
-const emailValidator = (input, errorHandler) => {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  const isValid = emailRegex.test(input.value);
-
-  if (!isValid) errorHandler(input.id);
-
-  return isValid;
-};
-
-const lengthValidator = (input, errorHandler, min, max) => {
-  const isValid = input.value.length >= min && input.value.length <= max;
-
-  if (!isValid) errorHandler(input.id);
-
-  return isValid;
-};
 
 const LoginPage = () => {
   const [mode, setMode] = useState("login");
@@ -45,47 +29,38 @@ const LoginPage = () => {
   };
 
   const authHandler = async () => {
-    let url =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCowqrVcdA4nxQ_VANHaFt-Z1wZfwizbZ8";
-
-    if (mode === "login") {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCowqrVcdA4nxQ_VANHaFt-Z1wZfwizbZ8";
-    }
-
     try {
       const data = {
-        email: "luis@teste.com",
+        email: formInputs[0].value,
         password: formInputs[1].value,
         returnSecureToken: true,
       };
 
-      const response = await AuthAPI.register(data);
-
-      console.log(response);
+      const response = await AuthAPI.register(data, mode);
 
       setAuth(response);
     } catch (e) {
-      console.log(e);
+      let error = e.message;
+
+      if (mode === "register") {
+        error = AuthAPI.registerErrorHandler(error);
+      } else {
+        error = AuthAPI.loginErrorHandler(error);
+      }
+
+      if (typeof error === "object") {
+        setErrorHandler(error.field, error.errorMsg);
+        return;
+      }
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    let isFormValid = true;
+    const isValid = formValidator(formInputs, setErrorHandler);
 
-    formInputs.forEach((input) => {
-      if (input.id === "email") {
-        isFormValid = emailValidator(input, setErrorHandler) && isFormValid;
-      }
-      if (input.id === "password") {
-        isFormValid =
-          lengthValidator(input, setErrorHandler, 6, 50) && isFormValid;
-      }
-    });
-
-    if (!isFormValid) {
+    if (!isValid) {
       return;
     }
 
@@ -127,6 +102,7 @@ const LoginPage = () => {
             onChange={inputChangeHandler}
             onFocus={inputFocusHandler}
           />
+          {formInputs[0].hasError && <p>{formInputs[0].errorMsg}</p>}
         </div>
         <div className="form__input-group">
           <label htmlFor={formInputs[1].id} className="form__input-label">
@@ -142,6 +118,7 @@ const LoginPage = () => {
             onChange={inputChangeHandler}
             onFocus={inputFocusHandler}
           />
+          {formInputs[1].hasError && <p>{formInputs[1].errorMsg}</p>}
           <p className="form__input-info">{formInputs[1].info}</p>
         </div>
         <div className="form__cta-container">

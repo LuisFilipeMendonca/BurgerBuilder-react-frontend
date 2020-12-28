@@ -1,14 +1,19 @@
-import Bread from "../../components/Bread";
-import Ingredient from "../../components/Ingredient";
+import { useContext } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import "./style.css";
 
 import { sortOrder } from "../../helpers/Burger";
 
+import OrderContext from "../../context/Order";
+
+import Bread from "../../components/Bread";
+import Ingredient from "../../components/Ingredient";
 import TitleSecondary from "../../components/TitleSecondary";
 
-const Burger = ({ order }) => {
+const Burger = () => {
+  const { order } = useContext(OrderContext);
+
   return (
     <section className="section burger">
       <header className="burger__header">

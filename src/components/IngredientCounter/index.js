@@ -1,12 +1,24 @@
+import { useContext } from "react";
+
 import "./style.css";
 
-const IngredientCounter = ({
-  ingredient,
-  addIngredientHandler,
-  removeIngredientHandler,
-  minusDisabled,
-  plusDisabled,
-}) => {
+import OrderContext from "../../context/Order";
+
+import { addIngredient, removeIngredient } from "../../helpers/Burger";
+
+const IngredientCounter = ({ ingredient, minusDisabled, plusDisabled }) => {
+  const { order, setOrder } = useContext(OrderContext);
+
+  const addIngredientHandler = (ing) => {
+    const updatedOrder = addIngredient(ing, order);
+    setOrder(updatedOrder);
+  };
+
+  const removeIngredientHandler = (ing) => {
+    const updatedOrder = removeIngredient(ing, order);
+    setOrder(updatedOrder);
+  };
+
   return (
     <div className="ingredients-counter">
       <button

@@ -17,7 +17,7 @@ import AuthContext from "./context/Auth";
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useLocalStorage("burgerOrder", []);
   const [isLoading, setIsLoading] = useState(true);
   const [auth, setAuth] = useLocalStorage("burgerAuth", {});
 

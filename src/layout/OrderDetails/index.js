@@ -7,11 +7,13 @@ import OrderDetailsItem from "../../components/OrderDetailsItem";
 import TitleSecondary from "../../components/TitleSecondary";
 
 import IngredientsContext from "../../context/Ingredients";
+import OrderContext from "../../context/Order";
 
 import { buildOrderDetails, calculateTotalPrice } from "../../helpers/Burger";
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = () => {
   const ingredients = useContext(IngredientsContext);
+  const { order } = useContext(OrderContext);
 
   const orderDetails = buildOrderDetails(order, ingredients).map(
     (ingredient) => {

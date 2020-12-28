@@ -22,6 +22,7 @@ const reducer = (state, action) => {
         (input) => input.id === action.payload.id
       );
       updatedErrorState[inputErrorIndex].hasError = true;
+      updatedErrorState[inputErrorIndex].errorMsg = action.payload.errorMsg;
       return updatedErrorState;
     default:
       return state;
@@ -37,8 +38,8 @@ const useInputs = (inputs) => {
       payload: { id: e.target.id, value: e.target.value },
     });
 
-  const setErrorHandler = (id) =>
-    dispatch({ type: "SET_ERROR", payload: { id } });
+  const setErrorHandler = (id, errorMsg) =>
+    dispatch({ type: "SET_ERROR", payload: { id, errorMsg } });
 
   const inputFocusHandler = (e) =>
     dispatch({ type: "FOCUS", payload: { id: e.target.id } });
