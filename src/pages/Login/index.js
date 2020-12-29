@@ -5,6 +5,7 @@ import "./style.css";
 import TitleSecondary from "../../components/TitleSecondary";
 import Input from "../../components/Inputs";
 import Dialog from "../../components/Dialog";
+import Form from "../../components/Form";
 
 import useInputs from "../../hooks/useInputs";
 import AuthContext from "../../context/Auth";
@@ -99,11 +100,13 @@ const LoginPage = () => {
             Register
           </button>
         </div>
-        <form className="form" onSubmit={submitHandler}>
-          <TitleSecondary
-            title="Login to purchase your delicious burger!"
-            modifier="center"
-          />
+        <Form
+          title={`${
+            mode === "login" ? "Login" : "Register"
+          } to purchase your delicious burger.`}
+          submitHandler={submitHandler}
+          btnSubmitDescription={`${mode === "login" ? "Login" : "Register"}`}
+        >
           {formInputs.map((input) => (
             <Input
               key={input.id}
@@ -117,12 +120,7 @@ const LoginPage = () => {
               inputFocusHandler={inputFocusHandler}
             />
           ))}
-          <div className="form__cta-container">
-            <button onClick={submitHandler}>
-              {mode === "login" ? "Login" : "Register"}
-            </button>
-          </div>
-        </form>
+        </Form>
       </section>
     </main>
   );

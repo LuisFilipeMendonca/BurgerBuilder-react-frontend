@@ -1,0 +1,12 @@
+.radio-group__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group__container > *:not(:first-child) {
+  margin: 0.5rem 0;
+}
+
+.radio-group__container > :first-child {
+  margin-bottom: 0.5rem;
+}

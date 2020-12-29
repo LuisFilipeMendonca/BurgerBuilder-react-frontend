@@ -5,18 +5,16 @@ import "./style.css";
 
 import OrderDetailsItem from "../../components/OrderDetailsItem";
 import TitleSecondary from "../../components/TitleSecondary";
+import Button from "../../components/Button";
 
 import IngredientsContext from "../../context/Ingredients";
 import OrderContext from "../../context/Order";
-import AuthContext from "../../context/Auth";
 
 import { buildOrderDetails, calculateTotalPrice } from "../../helpers/Burger";
-import { Redirect } from "react-router-dom";
 
 const OrderDetails = () => {
   const ingredients = useContext(IngredientsContext);
   const { order } = useContext(OrderContext);
-  const { auth } = useContext(AuthContext);
 
   const orderDetails = buildOrderDetails(order, ingredients).map(
     (ingredient) => {
@@ -41,6 +39,9 @@ const OrderDetails = () => {
           </span>
         </span>
       </div>
+      <Button isLink mode="primary" path="/purchase">
+        Purchase
+      </Button>
       <TransitionGroup component="ul" className="order-details__menu">
         {orderDetails}
       </TransitionGroup>

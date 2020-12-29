@@ -5,6 +5,7 @@ import IngredientsContext from "../../context/Ingredients";
 
 import IngredientCounter from "../../components/IngredientCounter";
 import TitleSecondary from "../../components/TitleSecondary";
+import Button from "../../components/Button";
 
 const BurgerCta = () => {
   const { order, setOrder } = useContext(OrderContext);
@@ -29,7 +30,9 @@ const BurgerCta = () => {
             }
           />
         ))}
-        <button onClick={resetOrderHandler}>Reset Burger</button>
+        <Button mode="flat" clickHandler={resetOrderHandler}>
+          Reset Burger
+        </Button>
       </div>
     </section>
   );

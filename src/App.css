@@ -37,6 +37,7 @@ a {
 
 .main--modified {
   min-height: calc(100% - 60px);
+  height: unset;
 }
 
 .main > * {
@@ -45,6 +46,15 @@ a {
 
 .section {
   padding: 2rem;
+}
+
+.section--center {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 550px;
 }
 
 .burger-cta,
@@ -70,6 +80,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
