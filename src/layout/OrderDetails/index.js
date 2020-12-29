@@ -8,12 +8,15 @@ import TitleSecondary from "../../components/TitleSecondary";
 
 import IngredientsContext from "../../context/Ingredients";
 import OrderContext from "../../context/Order";
+import AuthContext from "../../context/Auth";
 
 import { buildOrderDetails, calculateTotalPrice } from "../../helpers/Burger";
+import { Redirect } from "react-router-dom";
 
 const OrderDetails = () => {
   const ingredients = useContext(IngredientsContext);
   const { order } = useContext(OrderContext);
+  const { auth } = useContext(AuthContext);
 
   const orderDetails = buildOrderDetails(order, ingredients).map(
     (ingredient) => {

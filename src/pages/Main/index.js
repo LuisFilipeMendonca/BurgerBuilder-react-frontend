@@ -4,11 +4,11 @@ import OrderDetails from "../../layout/OrderDetails";
 
 const MainPage = () => {
   return (
-    <>
+    <main className="main">
       <BurgerCta />
       <Burger />
       <OrderDetails />
-    </>
+    </main>
   );
 };
 

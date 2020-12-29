@@ -19,3 +19,23 @@
   transform: translate(30px, 0);
   transition: opacity 0.5s ease-in, transform 0.5s ease-in;
 }
+
+.order-details__menu {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1rem;
+}
+
+.order-price {
+  margin-bottom: 1rem;
+}
+
+.order-price__value {
+  font-weight: bold;
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+}

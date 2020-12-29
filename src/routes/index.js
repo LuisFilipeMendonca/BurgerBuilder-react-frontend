@@ -1,17 +1,19 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 import "./style.css";
 
 import MainPage from "../pages/Main";
 import LoginPage from "../pages/Login";
-import RegisterPage from "../pages/Register";
+import OrdersPage from "../pages/Orders";
+
+import MyRoute from "../components/MyRoute";
 
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" component={MainPage} exact />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/register" component={RegisterPage} />
+      <MyRoute path="/" component={MainPage} exact />
+      <MyRoute path="/login" component={LoginPage} />
+      <MyRoute path="/orders" component={OrdersPage} isClosed />
     </Switch>
   );
 };

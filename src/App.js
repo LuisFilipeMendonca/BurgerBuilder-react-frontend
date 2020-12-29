@@ -65,9 +65,7 @@ const App = () => {
           <IngredientsContext.Provider value={ingredients}>
             <OrderContext.Provider value={{ order, setOrder }}>
               <Navbar />
-              <main className="main">
-                <Routes />
-              </main>
+              <Routes />
             </OrderContext.Provider>
           </IngredientsContext.Provider>
         </AuthContext.Provider>

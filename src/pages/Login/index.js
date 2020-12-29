@@ -51,34 +51,39 @@ const LoginPage = () => {
         error = AuthAPI.loginErrorHandler(error);
       }
 
-      console.log(error);
-
       if (typeof error === "object") {
         setErrorHandler(error.field, error.errorMsg);
         return;
       }
+
+      setHasError(true);
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // const isValid = formValidator(formInputs, setErrorHandler);
+    const isValid = formValidator(formInputs, setErrorHandler);
 
-    // if (!isValid) {
-    //   return;
-    // }
+    if (!isValid) {
+      return;
+    }
 
-    // authHandler();
-
-    setHasError(true);
+    authHandler();
   };
 
   const clearError = () => setHasError(null);
 
   return (
-    <>
-      <Dialog closeHandler={clearError} show={hasError} />
+    <main className="main main--modified">
+      <Dialog
+        closeHandler={clearError}
+        show={hasError}
+        title="An Error Ocurred!"
+      >
+        <h3>Something went wrong!</h3>
+        <p>Please try again later.</p>
+      </Dialog>
       <section className="section section--center">
         <div className="form__control">
           <button
@@ -119,7 +124,7 @@ const LoginPage = () => {
           </div>
         </form>
       </section>
-    </>
+    </main>
   );
 };
 

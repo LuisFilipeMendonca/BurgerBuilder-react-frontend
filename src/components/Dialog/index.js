@@ -1,10 +1,10 @@
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 import "./style.css";
 
 import TitleSecondary from "../TitleSecondary";
 
-const Dialog = ({ show, text, closeHandler }) => {
+const Dialog = ({ show, title, closeHandler, children }) => {
   return (
     <>
       <CSSTransition
@@ -17,22 +17,21 @@ const Dialog = ({ show, text, closeHandler }) => {
       </CSSTransition>
       <CSSTransition
         in={show}
-        timeout={1000}
+        timeout={1500}
         classNames="dialog-animate"
         unmountOnExit
       >
-        <div className="dialog">
+        <dialog open className="dialog">
           <header className="dialog__header">
-            <TitleSecondary title="An Error Ocurred!" modifier="light" />
+            <TitleSecondary title={title} modifier="light" />
           </header>
           <div className="dialog__content">
-            <h3 className="dialog__text">Something went wrong!</h3>
-            <p className="dialog__text">Please try again later.</p>
+            {children}
             <button onClick={closeHandler} className="dialog__close">
               Close
             </button>
           </div>
-        </div>
+        </dialog>
       </CSSTransition>
     </>
   );

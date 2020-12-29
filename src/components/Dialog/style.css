@@ -34,11 +34,7 @@
   padding: 1rem;
 }
 
-.dialog__text {
-  margin: 0.5rem 0;
-}
-
-.dialog__close {
+.dialog__content > * {
   margin: 0.5rem 0;
 }
 
@@ -48,27 +44,27 @@
 
 .backdrop-enter-active {
   opacity: 1;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
-.backdrop-enter {
+.backdrop-exit {
   opacity: 1;
 }
 
 .backdrop-exit-active {
   opacity: 0;
-  transition: opacity 1s ease-out 0.5s;
+  transition: opacity 0.3s ease-out 0.5s;
 }
 
 .dialog-animate-enter {
   opacity: 0;
-  transform: translateY(-50%, -30px);
+  transform: translate(-50%, -30px);
 }
 
 .dialog-animate-enter-active {
   opacity: 1;
   transform: translate(-50%, 0);
-  transition: all 1s ease-out 0.5s;
+  transition: all 0.5s ease-out 0.3s;
 }
 
 .dialog-animate-exit {
