@@ -24,6 +24,21 @@ const reducer = (state, action) => {
       updatedErrorState[inputErrorIndex].hasError = true;
       updatedErrorState[inputErrorIndex].errorMsg = action.payload.errorMsg;
       return updatedErrorState;
+    case "CHANGE_RADIO":
+      const updatedRadioState = [...state];
+      const inputRadioIndex = updatedRadioState.findIndex(
+        (input) => input.id === action.payload.target.name
+      );
+
+      const optionField = updatedRadioState[inputRadioIndex].options.find(
+        (option) => option.id === action.payload.target.id
+      );
+
+      updatedRadioState[inputRadioIndex].value = {
+        field: optionField.id,
+        price: optionField.price,
+      };
+      return updatedRadioState;
     default:
       return state;
   }
@@ -44,7 +59,16 @@ const useInputs = (inputs) => {
   const inputFocusHandler = (e) =>
     dispatch({ type: "FOCUS", payload: { id: e.target.id } });
 
-  return [formInputs, inputChangeHandler, inputFocusHandler, setErrorHandler];
+  const radioChangeHandler = (e) =>
+    dispatch({ type: "CHANGE_RADIO", payload: { target: e.target } });
+
+  return [
+    formInputs,
+    inputChangeHandler,
+    inputFocusHandler,
+    setErrorHandler,
+    radioChangeHandler,
+  ];
 };
 
 export default useInputs;

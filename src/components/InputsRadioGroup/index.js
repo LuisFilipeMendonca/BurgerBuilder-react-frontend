@@ -2,13 +2,15 @@ import "./style.css";
 
 import InputRadio from "../InputsRadio";
 
-const InputsRadioGroup = ({ inputsOptions, id }) => {
+const InputsRadioGroup = ({ inputsOptions, id, inputChangeHandler }) => {
   const groupContent = inputsOptions.map((input) => (
     <InputRadio
       key={input.id}
       id={id}
+      optionId={input.id}
       value={input.value}
       label={input.label}
+      inputChangeHandler={inputChangeHandler}
     />
   ));
 

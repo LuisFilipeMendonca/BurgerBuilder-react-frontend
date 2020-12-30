@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "../../services/axios";
 
 class Auth {
   static async register(data, mode) {
@@ -50,6 +51,16 @@ class Auth {
         };
       default:
         return "Something went wrong. Try again later";
+    }
+  }
+
+  static async saveUserData(data, userId) {
+    try {
+      await axiosInstance.put(`/users-data/${userId}.json`, data);
+
+      console.log("before");
+    } catch (e) {
+      throw new Error("Something went wrong!");
     }
   }
 }

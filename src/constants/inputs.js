@@ -37,9 +37,16 @@ export const purchaseInputs = [
     placeholder: "Your phone number",
   },
   {
+    id: "address",
+    type: "text",
+    value: "",
+    hasError: false,
+    placeholder: "Your address",
+  },
+  {
     id: "extras",
     type: "radio",
-    value: "nothing",
+    value: { field: "nothing" },
     options: [
       {
         id: "drink",

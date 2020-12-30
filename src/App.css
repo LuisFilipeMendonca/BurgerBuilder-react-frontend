@@ -128,8 +128,13 @@ a {
 }
 
 .form__cta-container {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin: 2rem 0;
+}
+
+.form__cta-container > *:not(:last-of-type) {
+  margin-right: 1rem;
 }
 
 .form__cta-container button {
