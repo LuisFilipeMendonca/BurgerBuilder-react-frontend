@@ -57,10 +57,18 @@ class Auth {
   static async saveUserData(data, userId) {
     try {
       await axiosInstance.put(`/users-data/${userId}.json`, data);
-
-      console.log("before");
     } catch (e) {
       throw new Error("Something went wrong!");
+    }
+  }
+
+  static async fetchUserData(userId) {
+    try {
+      const response = await axiosInstance(`/users-data/${userId}.json`);
+
+      return response.data;
+    } catch (e) {
+      console.log(e);
     }
   }
 }

@@ -1,4 +1,6 @@
 import TitleSecondary from "../TitleSecondary";
+import BaseCard from "../BaseCard";
+import { Link } from "react-router-dom";
 
 const Form = ({
   title,
@@ -8,16 +10,18 @@ const Form = ({
   submitHandler,
 }) => {
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <TitleSecondary title={title} modifier="center" />
-      {children}
-      <div className="form__cta-container">
-        {adicionalBtn}
-        <button type="submit" onClick={submitHandler}>
-          {btnSubmitDescription}
-        </button>
-      </div>
-    </form>
+    <BaseCard>
+      <form className="form" onSubmit={submitHandler}>
+        <TitleSecondary title={title} modifier="center" />
+        {children}
+        <div className="form__cta-container">
+          {adicionalBtn}
+          <button type="submit" onClick={submitHandler}>
+            {btnSubmitDescription}
+          </button>
+        </div>
+      </form>
+    </BaseCard>
   );
 };
 

@@ -1,20 +1,22 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useHistory, Switch } from "react-router-dom";
 
-import { purchaseInputs } from "../../constants/inputs";
+import "./style.css";
 
-import useInputs from "../../hooks/useInputs";
+import { formValidator } from "../../helpers/Form";
 
-import AuthContext from "../../context/Auth";
-
-import AuthAPI from "../../api/Auth";
-
-import Form from "../../components/Form";
-import Input from "../../components/Inputs";
-import InputsRadioGroup from "../../components/InputsRadioGroup";
+import MyRoute from "../../components/MyRoute";
 import Dialog from "../../components/Dialog";
-import axiosInstance from "../../services/axios";
+import FormPurchase from "../../layout/FormPurchase";
+import Checkout from "../../layout/Checkout";
 
 const PurchasePage = () => {
+  const [inputs, setInputs] = useState(null);
+  const location = useLocation();
+  const history = useHistory();
+
+  console.log(location);
+
   const [showDialog, setShowDialog] = useState({
     value: false,
     title: "",
@@ -22,88 +24,22 @@ const PurchasePage = () => {
     paragraph: "",
   });
 
-  const { auth } = useContext(AuthContext);
-  const [
-    formInputs,
-    inputChangeHandler,
-    inputFocusHandler,
-    setErrorHandler,
-    radioChangeHandler,
-  ] = useInputs([...purchaseInputs]);
+  const submitHandler = (e, formInputs, setErrorHandler) => {
+    e.preventDefault();
 
-  const formChildren = formInputs.map((input) => {
-    return input.type === "radio" ? (
-      <InputsRadioGroup
-        key={input.id}
-        id={input.id}
-        inputsOptions={input.options}
-        inputChangeHandler={radioChangeHandler}
-      />
-    ) : (
-      <Input
-        key={input.id}
-        type={input.type}
-        id={input.id}
-        value={input.value}
-        hasError={input.hasError}
-        errorMsg={input.errorMsg}
-        inputChangeHandler={inputChangeHandler}
-        inputFocusHandler={inputFocusHandler}
-      />
-    );
-  });
+    const isValid = formValidator(formInputs, setErrorHandler);
 
-  const saveUserData = async (userData) => {
-    try {
-      await AuthAPI.saveUserData(userData, auth.userId);
-
-      setShowDialog({
-        value: true,
-        title: "Success Storing Data",
-        subtitle: "Your data was added successfully in our database!",
-        paragraph: "Next time you have less job.",
-      });
-    } catch (e) {
-      setShowDialog({
-        value: true,
-        title: "An Error Ocurred!",
-        subtitle: e.message,
-        paragraph: "Try again later.",
-      });
+    if (!isValid) {
+      return;
     }
+
+    setInputs(formInputs);
+    history.push(`/purchase/checkout`);
   };
 
-  const buildUserData = () => {
-    let userData = {};
-
-    formInputs.forEach((input) => {
-      if (input.type !== "radio") {
-        userData[input.id] = input.value;
-      }
-    });
-
-    saveUserData(userData);
+  const setShowDialogHandler = (dialogConfig) => {
+    setShowDialog(dialogConfig);
   };
-
-  const fetchUserData = async () => {
-    try {
-      const response = await axiosInstance(`/users-data/${auth.userId}.json`);
-
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const adicionalBtn = (
-    <button type="button" onClick={buildUserData}>
-      Save My Data
-    </button>
-  );
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   return (
     <>
@@ -112,15 +48,17 @@ const PurchasePage = () => {
         <p>{showDialog.paragraph}</p>
       </Dialog>
       <main className="main main--modified">
-        <section className="section section--center">
-          <Form
-            title="Enter your data to complete the purchase!"
-            btnSubmitDescription="Continue"
-            adicionalBtn={adicionalBtn}
-          >
-            {formChildren}
-          </Form>
-        </section>
+        <FormPurchase
+          setShowDialogHandler={setShowDialogHandler}
+          submitHandler={submitHandler}
+        />
+        <Switch>
+          <MyRoute
+            path="/purchase/checkout"
+            isClosed
+            render={() => <Checkout formInputs={inputs} />}
+          />
+        </Switch>
       </main>
     </>
   );

@@ -30,8 +30,10 @@ export const removeIngredient = (removedIngredient, order) => {
   return orderCopy;
 };
 
-export const calculateTotalPrice = (order) => {
-  return order.reduce((acc, curr) => (acc += curr.price), 0).toFixed(2);
+export const calculateTotalPrice = (order, initialValue = 0) => {
+  return order
+    .reduce((acc, curr) => (acc += curr.price), initialValue)
+    .toFixed(2);
 };
 
 export const buildOrderDetails = (order, ingredients) => {

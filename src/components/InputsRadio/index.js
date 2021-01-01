@@ -1,6 +1,13 @@
 import "./style.css";
 
-const InputRadio = ({ id, optionId, value, label, inputChangeHandler }) => {
+const InputRadio = ({
+  id,
+  optionId,
+  value,
+  label,
+  inputChangeHandler,
+  selectedValue,
+}) => {
   return (
     <label className="input-radio__label">
       <input
@@ -9,6 +16,7 @@ const InputRadio = ({ id, optionId, value, label, inputChangeHandler }) => {
         id={optionId}
         value={value}
         onChange={inputChangeHandler}
+        checked={selectedValue === value}
       />
       <div className="input-radio__description">{label}</div>
     </label>

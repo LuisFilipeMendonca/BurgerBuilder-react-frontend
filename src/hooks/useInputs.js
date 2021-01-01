@@ -39,6 +39,15 @@ const reducer = (state, action) => {
         price: optionField.price,
       };
       return updatedRadioState;
+    case "SET_INPUTS_VALUE":
+      const updatedInputs = [...state];
+
+      Object.keys(action.payload).forEach((key) => {
+        const inputIndex = updatedInputs.findIndex((input) => input.id === key);
+        updatedInputs[inputIndex].value = action.payload[key];
+      });
+
+      return updatedInputs;
     default:
       return state;
   }
@@ -62,12 +71,16 @@ const useInputs = (inputs) => {
   const radioChangeHandler = (e) =>
     dispatch({ type: "CHANGE_RADIO", payload: { target: e.target } });
 
+  const setInputsValue = (inputsValues) =>
+    dispatch({ type: "SET_INPUTS_VALUE", payload: inputsValues });
+
   return [
     formInputs,
     inputChangeHandler,
     inputFocusHandler,
     setErrorHandler,
     radioChangeHandler,
+    setInputsValue,
   ];
 };
 
