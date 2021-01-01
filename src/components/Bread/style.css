@@ -19,7 +19,7 @@
 }
 
 .bread-bottom,
-.bread-bottom--navbar {
+.bread-bottom--small {
   height: 35px;
   border-radius: 8px 8px 16px 16px;
   z-index: 1;
@@ -27,20 +27,20 @@
 
 .bread-top,
 .bread-bottom,
-.bread-top--navbar,
-.bread-bottom--navbar {
+.bread-top--small,
+.bread-bottom--small {
   background-color: #f28f2c;
   box-shadow: inset 0 0 1rem #9c5b1a;
   margin: 1px 0;
 }
 
-.bread-top--navbar {
+.bread-top--small {
   height: 8px;
   border-radius: 8px 8px 4px 4px;
   border: 1px solid #542e08;
 }
 
-.bread-bottom--navbar {
+.bread-bottom--small {
   height: 6px;
   border: 1px solid #542e08;
   border-radius: 4px 4px 8px 8px;

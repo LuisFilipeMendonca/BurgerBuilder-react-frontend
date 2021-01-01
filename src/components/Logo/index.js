@@ -4,13 +4,13 @@ import Ingredient from "../Ingredient";
 const Logo = () => {
   return (
     <Bread
-      classNameTop="bread-top--navbar"
-      classNameBottom="bread-bottom--navbar"
+      classNameTop="bread-top--small"
+      classNameBottom="bread-bottom--small"
     >
-      <Ingredient type="tomato" className="tomato--navbar" />
-      <Ingredient type="lettuce" className="lettuce--navbar" />
-      <Ingredient type="cheese" className="cheese--navbar" />
-      <Ingredient type="meat" className="meat--navbar" />
+      <Ingredient type="tomato" className="tomato--small" />
+      <Ingredient type="lettuce" className="lettuce--small" />
+      <Ingredient type="cheese" className="cheese--small" />
+      <Ingredient type="meat" className="meat--small" />
     </Bread>
   );
 };

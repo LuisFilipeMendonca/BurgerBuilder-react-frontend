@@ -26,7 +26,7 @@ const BurgerCta = () => {
             quantity={ingredient.quantity}
             minusDisabled={!order.some((ing) => ing.name === ingredient.name)}
             plusDisabled={
-              order.filter((ing) => ing.name === ingredient.name).length >= 5
+              order.filter((ing) => ing.name === ingredient.name).length >= 3
             }
           />
         ))}

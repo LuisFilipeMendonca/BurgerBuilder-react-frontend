@@ -1,5 +1,11 @@
-import { useEffect, useState } from "react";
-import { useLocation, useHistory, Switch } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useHistory, Switch } from "react-router-dom";
+
+import { purchaseInputs } from "../../constants/inputs";
+
+import useInputs from "../../hooks/useInputs";
+
+import OrderContext from "../../context/Order";
 
 import "./style.css";
 
@@ -11,11 +17,16 @@ import FormPurchase from "../../layout/FormPurchase";
 import Checkout from "../../layout/Checkout";
 
 const PurchasePage = () => {
-  const [inputs, setInputs] = useState(null);
-  const location = useLocation();
+  const [
+    formInputs,
+    inputChangeHandler,
+    inputFocusHandler,
+    setErrorHandler,
+    radioChangeHandler,
+    setInputsValue,
+  ] = useInputs([...purchaseInputs]);
   const history = useHistory();
-
-  console.log(location);
+  const { setOrder } = useContext(OrderContext);
 
   const [showDialog, setShowDialog] = useState({
     value: false,
@@ -23,6 +34,7 @@ const PurchasePage = () => {
     subtitle: "",
     paragraph: "",
   });
+  const [redirect, setRedirect] = useState(false);
 
   const submitHandler = (e, formInputs, setErrorHandler) => {
     e.preventDefault();
@@ -33,17 +45,38 @@ const PurchasePage = () => {
       return;
     }
 
-    setInputs(formInputs);
     history.push(`/purchase/checkout`);
   };
 
-  const setShowDialogHandler = (dialogConfig) => {
+  const setShowDialogHandler = (dialogConfig, redirect = false) => {
     setShowDialog(dialogConfig);
+
+    if (redirect) {
+      setRedirect(true);
+    }
+  };
+
+  const closeDialogHandler = () => {
+    setShowDialog((prevState) => {
+      return {
+        ...prevState,
+        value: false,
+      };
+    });
+
+    if (redirect) {
+      setOrder([]);
+      history.replace("/");
+    }
   };
 
   return (
     <>
-      <Dialog show={showDialog.value} title={showDialog.title}>
+      <Dialog
+        show={showDialog.value}
+        title={showDialog.title}
+        closeHandler={closeDialogHandler}
+      >
         <h3>{showDialog.subtitle}</h3>
         <p>{showDialog.paragraph}</p>
       </Dialog>
@@ -51,12 +84,23 @@ const PurchasePage = () => {
         <FormPurchase
           setShowDialogHandler={setShowDialogHandler}
           submitHandler={submitHandler}
+          formInputs={formInputs}
+          inputChangeHandler={inputChangeHandler}
+          inputFocusHandler={inputFocusHandler}
+          setErrorHandler={setErrorHandler}
+          radioChangeHandler={radioChangeHandler}
+          setInputsValue={setInputsValue}
         />
         <Switch>
           <MyRoute
             path="/purchase/checkout"
             isClosed
-            render={() => <Checkout formInputs={inputs} />}
+            render={() => (
+              <Checkout
+                formInputs={formInputs}
+                setShowDialogHandler={setShowDialogHandler}
+              />
+            )}
           />
         </Switch>
       </main>

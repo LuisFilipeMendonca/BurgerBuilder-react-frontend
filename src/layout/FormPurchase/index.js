@@ -1,9 +1,5 @@
 import { useEffect, useContext } from "react";
 
-import { purchaseInputs } from "../../constants/inputs";
-
-import useInputs from "../../hooks/useInputs";
-
 import AuthAPI from "../../api/Auth";
 
 import AuthContext from "../../context/Auth";
@@ -13,16 +9,17 @@ import Form from "../../components/Form";
 import Input from "../../components/Inputs";
 import InputsRadioGroup from "../../components/InputsRadioGroup";
 
-const FormPurchase = ({ setShowDialogHandler, submitHandler }) => {
+const FormPurchase = ({
+  setShowDialogHandler,
+  submitHandler,
+  formInputs,
+  inputChangeHandler,
+  inputFocusHandler,
+  setErrorHandler,
+  radioChangeHandler,
+  setInputsValue,
+}) => {
   const { auth } = useContext(AuthContext);
-  const [
-    formInputs,
-    inputChangeHandler,
-    inputFocusHandler,
-    setErrorHandler,
-    radioChangeHandler,
-    setInputsValue,
-  ] = useInputs([...purchaseInputs]);
 
   const formChildren = formInputs.map((input) => {
     return input.type === "radio" ? (

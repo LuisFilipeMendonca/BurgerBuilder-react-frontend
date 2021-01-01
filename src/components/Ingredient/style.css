@@ -4,25 +4,25 @@
   background-color: #542e08;
 }
 
-.meat--navbar {
+.meat--small {
   height: 4px;
   border-radius: 2px;
   background-color: #542e08;
 }
 
-.cheese--navbar {
+.cheese--small {
   border-radius: 2px;
   height: 2px;
   background-color: #d9b71e;
 }
 
-.lettuce--navbar {
+.lettuce--small {
   border-radius: 2px;
   height: 2px;
   background-color: #18941e;
 }
 
-.tomato--navbar {
+.tomato--small {
   position: relative;
   height: 2px;
   background-color: red;
@@ -64,10 +64,10 @@
 .lettuce,
 .bacon,
 .tomato,
-.meat--navbar,
-.cheese--navbar,
-.tomato--navbar,
-.lettuce--navbar {
+.meat--small,
+.cheese--small,
+.tomato--small,
+.lettuce--small {
   margin: 1px 0;
 }
 
