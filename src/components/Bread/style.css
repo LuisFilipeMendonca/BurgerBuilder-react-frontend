@@ -1,6 +1,6 @@
 .bread-top {
-  height: 75px;
-  border-radius: 75px 75px 8px 8px;
+  height: 60px;
+  border-radius: 60px 60px 8px 8px;
   position: relative;
   z-index: 1;
 }
@@ -20,8 +20,8 @@
 
 .bread-bottom,
 .bread-bottom--small {
-  height: 35px;
-  border-radius: 8px 8px 16px 16px;
+  height: 25px;
+  border-radius: 8px 8px 12px 12px;
   z-index: 1;
 }
 

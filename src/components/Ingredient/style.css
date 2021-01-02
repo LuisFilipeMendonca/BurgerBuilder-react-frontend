@@ -1,5 +1,5 @@
 .meat {
-  height: 25px;
+  height: 20px;
   border-radius: 8px;
   background-color: #542e08;
 }
@@ -36,11 +36,12 @@
 .cheese::after {
   content: "";
   position: absolute;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 15px solid #d9b71e;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #d9b71e;
   top: 100%;
   left: 70%;
+  z-index: 1;
 }
 
 .lettuce {
@@ -55,7 +56,7 @@
 .lettuce,
 .bacon,
 .tomato {
-  height: 10px;
+  height: 8px;
   border-radius: 8px;
 }
 
