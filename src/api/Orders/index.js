@@ -18,6 +18,14 @@ class Order {
       console.log(e);
     }
   }
+
+  static async deleteOrder(orderId, userId) {
+    try {
+      await axiosInstance.delete(`/orders/${userId}/${orderId}.json`);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export default Order;

@@ -45,3 +45,10 @@
   border: 1px solid #542e08;
   border-radius: 4px 4px 8px 8px;
 }
+
+.bread-bottom,
+.bread-top,
+.bread-bottom--small,
+.bread-top--small {
+  width: 100%;
+}

@@ -70,6 +70,7 @@
 .tomato--small,
 .lettuce--small {
   margin: 1px 0;
+  width: 100%;
 }
 
 .tomato {

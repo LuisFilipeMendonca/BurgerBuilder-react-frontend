@@ -21,11 +21,21 @@ const OrdersPage = () => {
     try {
       const response = await OrdersAPI.fetchOrders(auth.userId);
 
-      const userOrders = buildUserOrders(response);
-
-      console.log(userOrders);
+      const userOrders = response ? buildUserOrders(response) : [];
 
       setOrders(userOrders);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteOrderHandler = async (orderId) => {
+    try {
+      await OrdersAPI.deleteOrder(orderId, auth.userId);
+
+      let updatedOrders = [...orders];
+      updatedOrders = updatedOrders.filter((order) => order.id !== orderId);
+      setOrders(updatedOrders);
     } catch (e) {
       console.log(e);
     }
@@ -39,15 +49,15 @@ const OrdersPage = () => {
     <main className="main main--modified">
       <section className="section">
         {orders.length > 0 &&
-          orders.map((order) => (
-            <BaseCard key={order.id}>
-              <div className="order">
-                <OrderItem
-                  order={order.details}
-                  extra={extra(order.extras)}
-                  extraPrice={order.extras.price}
-                />
-              </div>
+          orders.map(({ id, details, extras, userDetails }) => (
+            <BaseCard key={id}>
+              <OrderItem
+                order={details}
+                extra={extra(extras)}
+                extraPrice={extras.price}
+                userDetails={userDetails}
+                deleteOrderHandler={() => deleteOrderHandler(id)}
+              />
             </BaseCard>
           ))}
       </section>

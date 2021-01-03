@@ -1,0 +1,43 @@
+.order {
+  display: flex;
+}
+
+.order:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+
+.order__burger {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order__details {
+  flex: 1;
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order__item {
+  padding: 0.5rem 0;
+}
+
+.order__item--inline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order__menu {
+  list-style: circle;
+  padding: 0 1rem;
+}
+
+.order__menu > *:not(:last-of-type),
+.order__title,
+.order__btn {
+  margin-bottom: 0.5rem;
+}
